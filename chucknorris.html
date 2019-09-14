@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <button id="btn">Click me</button>
+    <div id="demo"></div>
+    <br />
+    <img src="" id="image"/>
+
+    <script>
+        var btngrab = document.getElementById("btn");
+
+        function doc() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    var data = JSON.parse(this.responseText);
+                    document.getElementById("image").src = data.icon_url;
+                    document.getElementById("demo").innerHTML = data.value;
+
+                    console.log(data.icon_url);
+                }
+            };
+            xhttp.open("GET", "https://api.chucknorris.io/jokes/random", true);
+            xhttp.send();
+        }
+        btngrab.addEventListener("click", doc);
+
+    </script>
+</body>
+</html>
